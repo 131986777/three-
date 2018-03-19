@@ -4,28 +4,28 @@
 		<div class="content">
 			<div class="back">
 				<div class="content-box">
-					<div class="box" refs="panel" @click="message('jy')">
-						<div class="box-top" :class="{ 'open': jy }"></div>
+					<div class="box" @click="message()">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
-					<div class="box" @click="message('sl')">
-						<div class="box-top" :class="{ 'open': sl }"></div>
+					<div class="box">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
-					<div class="box" @click="message('gh')">
-						<div class="box-top" :class="{ 'open': gh }"></div>
+					<div class="box">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
-					<div class="box" @click="message('ls')">
-						<div class="box-top" :class="{ 'open': ls }"></div>
+					<div class="box">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
-					<div class="box" @click="message('yx')">
-						<div class="box-top" :class="{ 'open': yx }"></div>
+					<div class="box">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
-					<div class="box" @click="message('dp')">
-						<div class="box-top" :class="{ 'open': dp }"></div>
+					<div class="box">
+						<div class="box-top"></div>
 						<div class="box-content"></div>
 					</div>
 
@@ -34,33 +34,23 @@
 
 		</div>
 		<div class="chuai_box" v-if="messageBox">
-			<div class="message wzc" v-if="wzc">
+			<div class="message wzc">
 				<div class="titles">您还未注册，请注册领取</div>
 				<input type="text" name="" id="" value="" placeholder="请输入手机号" /><br />
 				<input type="password" name="" id="" value="" placeholder="请输入密码" class="password" /><br />
-				<input class="bth bth-wzc" value="开始抽取" readonly @click="wzctj">
+				<input class="bth bth-wzc" value="领取红包" readonly>
 
 				</input>
 			</div>
-			<div class="message zc" v-if="zc">
+			<div class="message zc">
 				<div class="titles">请填写手机号领取</div>
 				<input type="text" name="" id="" value="" class="phone-zc" placeholder="请输入手机号" /><br />
 
-				<input class="bth bth-zc" value="开始抽取" readonly @click="tj">
-
-				</input>
-			</div>
-			<div class="message wzc zj" v-if="zj">
-				<div class="titles">恭喜你中</div>
-				<input type="text" name="" id="" value="" placeholder="请输入手机号" /><br />
-				<input type="text" name="" id="" value="" placeholder="请选择门店" @click="showshop" v-model="shops"  readonly /><br />
-				<input class="bth bth-wzc" value="提交信息" readonly>
+				<input class="bth bth-zc" value="领取红包" readonly>
 
 				</input>
 			</div>
 		</div>
-		<card @shopName='shop' ref='shopname'></card>
-
 	</div>
 
 </template>
@@ -159,7 +149,7 @@
 		animation-name: shake;
 	}
 	
-	.open {
+	.start {
 		animation: shake 1s;
 		animation-fill-mode: forwards;
 	}
@@ -211,6 +201,11 @@
 		font-size: .36rem;
 	}
 	
+	.wzc {
+		opacity: 0;
+		display: none;
+	}
+	
 	.zc {
 		line-height: .5rem;
 	}
@@ -258,47 +253,14 @@
 		text-align: -webkit-center;
 		z-index: 1000;
 	}
-	
-	.mint-popup {
-		width: 80%
-	}
-	.zj{
-		    line-height: .3rem;
-	}
-	.picker-item{
-		text-align: center;
-	}
 </style>
-
 <script>
-	import card from './card'
-	import Vue from 'vue';
-	import { Toast } from 'mint-ui';
-	import { Picker } from 'mint-ui';
-
-	Vue.component(Picker.name, Picker);
 	export default {
 
 		data() {
 			return {
-				messageBox: false,
-				messageBoxzc: false,
-				zc: false,
-				wzc: false,
-				jy: false,
-				sl: false,
-				gh: false,
-				ls: false,
-				yx: false,
-				dp: false,
-				kq: false,
-				zj: false,
-				shopmsg:'',
-				shops:'',
+				messageBox:false,
 			}
-		},
-		components: {
-			card
 		},
 		mounted: function() {
 
@@ -336,39 +298,8 @@
 				}
 				return "";
 			},
-			message: function(shop) {
-				console.log(shop)
-				this.kq = shop
-				this.messageBox = true
-				this.zc = true
-
-			},
-			tj: function() {
-
-				Toast('提示信息');
-
-				this.zc = false;
-				this.wzc = true
-			},
-			wzctj: function() {
-				this[this.kq] = true
-				this.messageBox = false;
-				this.wzc = false
-				setTimeout(() => {
-				this.zj=true
-				this.messageBox = true;
-				console.log(this.zj)
-				}, 3000)
-			},
-			shop: function(msg) {
-				console.log(msg)
-				this.shopmsg=msg
-				this.shops=msg.Name
-			},
-			showshop: function() {
-				this.zj=true
-				this.$refs.shopname.selectAddrPicker()
-
+			message: function() {
+					this.messageBox=true
 			}
 
 		}

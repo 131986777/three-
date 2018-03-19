@@ -4,18 +4,18 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 //require('./assets/css/flx.css')
-//require('./assets/js/flexible.min');
+require('./assets/js/rem');
 import $ from 'jquery'
 import { Navbar, TabItem } from 'mint-ui';
 Vue.component(Navbar.name, Navbar);
 Vue.component(TabItem.name, TabItem);
-//import Mint from 'mint-ui'
-//import 'mint-ui/lib/style.css'
+import Mint from 'mint-ui'
+import 'mint-ui/lib/style.css'
 //
 //
 //
 //
-//Vue.use(Mint);
+Vue.use(Mint);
 
 
 //import cess from './assets/js/ce.js'
